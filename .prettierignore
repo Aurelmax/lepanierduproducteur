@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+.nyc_output/
+*.log
+.env*
+.DS_Store
+Thumbs.db
+*.tgz
+.yarn-integrity
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

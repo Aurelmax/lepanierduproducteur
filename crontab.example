@@ -1,0 +1,27 @@
+# Configuration Cron pour la mise à jour automatique des paniers
+# 
+# Pour installer cette configuration :
+# 1. Copiez ce fichier vers votre crontab : crontab crontab.example
+# 2. Ou ajoutez manuellement : crontab -e
+#
+# ATTENTION : Remplacez /path/to/project par le chemin réel de votre projet
+
+# Mise à jour automatique des paniers chaque mercredi à 8h00
+0 8 * * 3 cd /path/to/project && node scripts/update-baskets.js >> logs/update-baskets.log 2>&1
+
+# Vérification quotidienne à 9h00 (pour les notifications)
+0 9 * * * cd /path/to/project && node scripts/check-status.js >> logs/status-check.log 2>&1
+
+# Nettoyage des logs chaque dimanche à 2h00
+0 2 * * 0 cd /path/to/project && find logs/ -name "*.log" -mtime +30 -delete
+
+# Exemples d'autres tâches utiles :
+# 
+# Sauvegarde de la base de données chaque jour à 3h00
+# 0 3 * * * cd /path/to/project && npm run backup-db
+#
+# Redémarrage de l'application chaque dimanche à 4h00
+# 0 4 * * 0 cd /path/to/project && pm2 restart panier-des-producteurs
+#
+# Mise à jour des dépendances chaque premier dimanche du mois
+# 0 5 1-7 * 0 cd /path/to/project && npm update && npm run build
