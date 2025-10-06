@@ -1,7 +1,7 @@
 'use client';
 
-import Logo from './Logo';
 import CartButton from './CartButton';
+import Logo from './Logo';
 
 export default function ModernHeader() {
   return (
@@ -14,6 +14,12 @@ export default function ModernHeader() {
             <span>✉️ contact@lepanierduproducteur.com</span>
           </div>
           <div className='flex items-center space-x-4'>
+            <a
+              href='/creer-compte'
+              className='text-white hover:text-primary-200 font-medium transition-colors'
+            >
+              Créer un compte
+            </a>
             <span>FR</span>
             <span className='text-primary-200'>Paiement sécurisé</span>
           </div>

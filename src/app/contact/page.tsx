@@ -1,81 +1,182 @@
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import CompanyContactForm from '../../components/CompanyContactForm';
 import PageHero from '../../components/PageHero';
 
 export default function Contact() {
   return (
     <div className='min-h-screen bg-accent-light'>
-      <PageHero title='Contactez-nous' subtitle='Nous sommes là pour vous aider' />
+      <PageHero title='Contact' subtitle='Devenez un point de distribution ou contactez-nous' />
 
       <div className='py-16'>
         <div className='container mx-auto px-4'>
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-12'>
-            <div>
-              <h2 className='text-2xl font-display font-bold text-accent-dark mb-6'>
-                Informations de contact
-              </h2>
-              <div className='space-y-4'>
-                <div className='flex items-center space-x-3'>
-                  <div className='w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center'>
-                    <span className='text-white'>📞</span>
-                  </div>
-                  <div>
-                    <p className='font-semibold text-accent-dark'>Téléphone</p>
-                    <p className='text-gray-600'>06 12 34 56 78</p>
-                  </div>
-                </div>
-                <div className='flex items-center space-x-3'>
-                  <div className='w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center'>
-                    <span className='text-white'>✉️</span>
-                  </div>
-                  <div>
-                    <p className='font-semibold text-accent-dark'>Email</p>
-                    <p className='text-gray-600'>contact@panierduproducteur.fr</p>
-                  </div>
-                </div>
-                <div className='flex items-center space-x-3'>
-                  <div className='w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center'>
-                    <span className='text-white'>📍</span>
-                  </div>
-                  <div>
-                    <p className='font-semibold text-accent-dark'>Adresse</p>
-                    <p className='text-gray-600'>123 Route de la Ferme, 12345 Village</p>
-                  </div>
-                </div>
+          {/* Informations de contact générales */}
+          <div className='mb-16'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12'>
+              <div className='bg-white rounded-lg shadow-md p-6 text-center'>
+                <Phone className='w-8 h-8 text-primary-500 mx-auto mb-4' />
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Téléphone</h3>
+                <p className='text-gray-600 mb-2'>06.16.69.70.97</p>
+                <a
+                  href='tel:0616697097'
+                  className='text-primary-500 hover:text-primary-600 font-medium'
+                >
+                  Appeler maintenant
+                </a>
+              </div>
+
+              <div className='bg-white rounded-lg shadow-md p-6 text-center'>
+                <Mail className='w-8 h-8 text-primary-500 mx-auto mb-4' />
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Email</h3>
+                <p className='text-gray-600 mb-2'>contact@lepanierduproducteur.com</p>
+                <a
+                  href='mailto:contact@lepanierduproducteur.com'
+                  className='text-primary-500 hover:text-primary-600 font-medium'
+                >
+                  Nous écrire
+                </a>
+              </div>
+
+              <div className='bg-white rounded-lg shadow-md p-6 text-center'>
+                <MapPin className='w-8 h-8 text-primary-500 mx-auto mb-4' />
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Adresse</h3>
+                <p className='text-gray-600'>
+                  145, chemin de la Constance
+                  <br />
+                  06600 Antibes
+                </p>
+              </div>
+
+              <div className='bg-white rounded-lg shadow-md p-6 text-center'>
+                <Clock className='w-8 h-8 text-primary-500 mx-auto mb-4' />
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Horaires</h3>
+                <p className='text-gray-600'>
+                  Lun-Sam: 15h-18h
+                  <br />
+                  Fermé le dimanche
+                </p>
               </div>
             </div>
+          </div>
 
-            <div>
-              <h2 className='text-2xl font-display font-bold text-accent-dark mb-6'>
-                Envoyez-nous un message
+          {/* Section pour les entreprises */}
+          <div className='mb-16'>
+            <div className='text-center mb-8'>
+              <h2 className='text-3xl font-display font-bold text-accent-dark mb-4'>
+                Devenez un point de distribution
               </h2>
-              <form className='space-y-4'>
-                <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>Nom</label>
-                  <input
-                    type='text'
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent'
-                  />
+              <p className='text-gray-600 max-w-3xl mx-auto'>
+                Vous êtes une société et souhaitez proposer votre lieu comme point de distribution
+                pour nos paniers fraîcheur ? Remplissez le formulaire ci-dessous et nous étudierons
+                votre demande dans les plus brefs délais.
+              </p>
+            </div>
+
+            <CompanyContactForm />
+          </div>
+
+          {/* Avantages pour les entreprises */}
+          <div className='bg-gradient-to-r from-primary-100 to-harvest-100 rounded-lg p-8 mb-16'>
+            <h2 className='text-2xl font-display font-bold text-accent-dark text-center mb-8'>
+              Avantages pour votre entreprise
+            </h2>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mx-auto mb-4'>
+                  <span className='text-white text-2xl'>🌱</span>
                 </div>
-                <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>Email</label>
-                  <input
-                    type='email'
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent'
-                  />
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Bien-être des employés
+                </h3>
+                <p className='text-gray-700'>
+                  Offrez des produits frais et locaux à vos équipes, favorisant leur bien-être et
+                  leur motivation.
+                </p>
+              </div>
+
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-harvest-500 rounded-full flex items-center justify-center mx-auto mb-4'>
+                  <span className='text-white text-2xl'>🤝</span>
                 </div>
-                <div>
-                  <label className='block text-sm font-medium text-gray-700 mb-2'>Message</label>
-                  <textarea
-                    rows={4}
-                    className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent'
-                  ></textarea>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Engagement RSE</h3>
+                <p className='text-gray-700'>
+                  Participez à l'économie locale et soutenez l'agriculture durable dans votre
+                  région.
+                </p>
+              </div>
+
+              <div className='text-center'>
+                <div className='w-16 h-16 bg-earth-500 rounded-full flex items-center justify-center mx-auto mb-4'>
+                  <span className='text-white text-2xl'>📦</span>
                 </div>
-                <button
-                  type='submit'
-                  className='w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200'
-                >
-                  Envoyer le message
-                </button>
-              </form>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>Service clé en main</h3>
+                <p className='text-gray-700'>
+                  Nous nous occupons de tout : livraison, gestion des commandes et communication
+                  avec vos employés.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className='bg-white rounded-lg shadow-lg p-8'>
+            <h2 className='text-2xl font-display font-bold text-accent-dark text-center mb-8'>
+              Questions fréquentes
+            </h2>
+
+            <div className='space-y-6'>
+              <div className='border-b border-gray-200 pb-4'>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Quels sont les critères pour devenir un point de distribution ?
+                </h3>
+                <p className='text-gray-600'>
+                  Nous recherchons des entreprises avec un minimum de 10 employés, disposant d'un
+                  espace approprié pour le stockage des paniers et d'horaires de récupération
+                  compatibles avec nos tournées de livraison.
+                </p>
+              </div>
+
+              <div className='border-b border-gray-200 pb-4'>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Y a-t-il des frais pour l'entreprise ?
+                </h3>
+                <p className='text-gray-600'>
+                  Non, devenir un point de distribution est entièrement gratuit pour l'entreprise.
+                  Seuls vos employés paient leurs commandes individuelles.
+                </p>
+              </div>
+
+              <div className='border-b border-gray-200 pb-4'>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Comment se déroule la livraison ?
+                </h3>
+                <p className='text-gray-600'>
+                  Nous livrons directement à votre entreprise selon un planning établi. Les paniers
+                  sont étiquetés avec le nom de chaque commanditaire et peuvent être récupérés
+                  pendant les heures d'ouverture de votre entreprise.
+                </p>
+              </div>
+
+              <div className='border-b border-gray-200 pb-4'>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Puis-je choisir les jours de livraison ?
+                </h3>
+                <p className='text-gray-600'>
+                  Oui, nous nous adaptons à vos contraintes et préférences. Nous proposons des
+                  livraisons du lundi au samedi selon vos besoins.
+                </p>
+              </div>
+
+              <div>
+                <h3 className='text-lg font-semibold text-accent-dark mb-2'>
+                  Que se passe-t-il si un employé ne récupère pas son panier ?
+                </h3>
+                <p className='text-gray-600'>
+                  Nous vous fournissons une liste des commandes avant chaque livraison. Si un panier
+                  n'est pas récupéré, nous le récupérons lors de notre prochaine tournée et
+                  remboursons le client.
+                </p>
+              </div>
             </div>
           </div>
         </div>

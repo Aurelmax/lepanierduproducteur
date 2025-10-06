@@ -1,296 +1,60 @@
+import Link from 'next/link';
 import PageHero from '../../components/PageHero';
 import { getCurrentWeekPeriod } from '../../utils/dateUtils';
+import {
+  formatDistributionDays,
+  formatFullAddress,
+  getDistributionPointsByType,
+  sortDistributionPointsByCityAndName,
+} from '../../utils/distributionUtils';
 
 export default function Distribution() {
   // Utiliser les dates automatiques
   const currentWeek = getCurrentWeekPeriod();
-  const distributionPoints = [
-    // Points de retrait principaux
-    {
-      city: 'DIRECTEMENT À LA PRODUCTION',
-      location: 'Antibes',
-      type: 'Point de retrait',
-      address: 'Retrait à la ferme',
-      schedule: '15-18h du lundi au samedi',
-      delivery: false,
-    },
-    {
-      city: 'NICE - GARE "RIQUIER"',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Gare Riquier',
-      schedule: 'Jeudi 2 Octobre (16h - 19h)',
-      delivery: false,
-    },
-    {
-      city: 'NICE - CENTRE ANTOINE LACASSAGNE',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Centre Antoine Lacassagne',
-      schedule: 'Mardi 7 Octobre (14h - 17h)',
-      delivery: false,
-    },
-    {
-      city: 'NICE - FAC DES SCIENCES DE VALROSE',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Fac des Sciences de Valrose',
-      schedule: 'Mardi 7 Octobre (14h30 - 15h00)',
-      delivery: false,
-    },
-    {
-      city: 'CANNES - PALM BEACH',
-      location: 'Cannes',
-      type: 'Point de retrait',
-      address: 'Palm Beach',
-      schedule: 'Lundi 6 Octobre (11h00 - 14h00)',
-      delivery: false,
-    },
-    {
-      city: 'CAGNES SUR MER - HIPPODROMME',
-      location: 'Cagnes sur Mer',
-      type: 'Point de retrait',
-      address: 'Hippodromme',
-      schedule: 'Mardi 7 Octobre (10h20)',
-      delivery: false,
-    },
-    {
-      city: 'ST LAURENT DU VAR - CAP 3000',
-      location: 'St Laurent du Var',
-      type: 'Point de retrait',
-      address: 'Cap 3000',
-      schedule: 'Mardi 7 Octobre (11h05 - 11h10)',
-      delivery: false,
-    },
-    {
-      city: 'ST LAURENT DU VAR - CENTRE',
-      location: 'St Laurent du Var',
-      type: 'Point de retrait',
-      address: 'Centre',
-      schedule: 'Mardi 7 Octobre (10h40)',
-      delivery: false,
-    },
-    {
-      city: "NICE ARENAS - QUARTIER D'AFFAIRES",
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: "Quartier d'Affaires",
-      schedule: 'Mardi 7 Octobre (11h15 - 11h20)',
-      delivery: false,
-    },
-    {
-      city: 'NICE - ARKOSE',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'ARKOSE',
-      schedule: 'Mardi 7 Octobre (16h - 23h)',
-      delivery: false,
-    },
-    {
-      city: 'MOUANS SARTOUX',
-      location: 'Mouans Sartoux',
-      type: 'Point de retrait',
-      address: 'Mouans Sartoux',
-      schedule: 'Lundi 6 Octobre (11h00)',
-      delivery: false,
-    },
-    {
-      city: 'STADE ALLIANZ RIVIERA',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Stade Allianz Riviera',
-      schedule: 'Mardi 7 Octobre (15h - 16h)',
-      delivery: false,
-    },
-    {
-      city: 'AZURVET CENTRE DE VÉTÉRINAIRES',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Centre de Vétérinaires',
-      schedule: 'Mardi 7 Octobre (15h00 - 17h00)',
-      delivery: false,
-    },
-    {
-      city: 'ANTIBES - VILLA THURET',
-      location: 'Antibes',
-      type: 'Point de retrait',
-      address: 'Villa Thuret',
-      schedule: 'Vendredi 3 Octobre (10h30 - 12h30)',
-      delivery: false,
-    },
-    {
-      city: 'ORANGE NICE BESSET',
-      location: 'Nice',
-      type: 'Point de retrait',
-      address: 'Orange Nice Besset',
-      schedule: 'Mardi 7 Octobre (14h)',
-      delivery: false,
-    },
-  ];
 
-  const sophiaAntipolisPoints = [
-    {
-      city: 'NAUTIPOLIS: COMPLEXE AQUATIQUE DE VALBONNE SOPHIA',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Centre nautique Nautipolis',
-      schedule: 'Vendredi 3 Octobre (vers 15h45)',
-      delivery: false,
-    },
-    {
-      city: 'MOURATOGLOU',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Mouratoglou',
-      schedule: 'Vendredi 3 Octobre (12h & 14h)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ THALES',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société Thales',
-      schedule: 'Vendredi 3 Octobre (14h30 - 16h30)',
-      delivery: false,
-    },
-    {
-      city: 'APPART\'ETUD "NEMEA"',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Appart\'Etud "Nemea"',
-      schedule: 'Vendredi 3 Octobre (12h & 16h)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ ARM',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société ARM',
-      schedule: 'Vendredi 3 Octobre (11h30), Lundi 6 Octobre (11h30)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ STELLA TELECOM ET SOCIÉTÉ AU ALENTOURS',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société Stella Telecom et société au Alentours',
-      schedule: 'Vendredi 3 Octobre (10h30)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ STMICROELECTRONICS',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société STMicroelectronics',
-      schedule: 'Vendredi 3 Octobre (14h30 - 16h30)',
-      delivery: false,
-    },
-    {
-      city: 'GEOAZUR CAMPUS AZUR CNRS',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Geoazur - Campus Azur CNRS',
-      schedule: 'Lundi 6 Octobre (10h15 - 10h30)',
-      delivery: false,
-    },
-    {
-      city: 'EMERALD SQUARE',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Emerald Square',
-      schedule: 'Vendredi 3 Octobre (10h30)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ E.T.S.I',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société E.T.S.I',
-      schedule: 'Vendredi 3 Octobre (14h30 - 16h30)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ ATOS',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société Atos',
-      schedule: 'Vendredi 3 Octobre (14h30 - 16h30)',
-      delivery: false,
-    },
-    {
-      city: 'WORLD TRADE CENTER',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'World Trade Center',
-      schedule: 'Vendredi 3 Octobre (14h30 - 16h30)',
-      delivery: false,
-    },
-    {
-      city: 'SOCIÉTÉ VINCI FACILITIES CEGELEC',
-      location: 'Sophia Antipolis',
-      type: 'Point de retrait',
-      address: 'Société Vinci Facilities Cegelec',
-      schedule: 'Vendredi 3 Octobre (12h & 16h)',
-      delivery: false,
-    },
-  ];
+  // Récupérer les points par catégorie
+  const pickupPoints = sortDistributionPointsByCityAndName(getDistributionPointsByType('retrait'));
+  const freeDeliveryPoints = getDistributionPointsByType('livraison_gratuite');
+  const paidDeliveryPoints = getDistributionPointsByType('livraison_payante');
 
-  const freeDeliveryOptions = [
-    {
-      city: 'LIVRAISON OFFERTE À DOMICILE',
-      location: 'Antibes',
-      type: 'Livraison gratuite',
-      address: "À partir de 15€ d'achat",
-      schedule: 'Lundi Après-midi, Mardi Après-midi, Mercredi Après-midi, Vendredi Après-midi, Samedi Matin',
-      delivery: true,
-      cost: 'Gratuit',
-    },
-  ];
-
-  const paidDeliveryOptions = [
-    {
-      city: 'LIVRAISON PAYANTE À DOMICILE',
-      location: 'Cannes-Mougins-Vallauris-Golfe juan',
-      type: 'Livraison payante',
-      address: '+ 3€',
-      schedule: 'Lundi 6 Octobre (10h - 16h)',
-      delivery: true,
-      cost: '3€',
-    },
-    {
-      city: 'LIVRAISON PAYANTE À DOMICILE',
-      location: 'LE CANNET',
-      type: 'Livraison payante',
-      address: '+ 3€',
-      schedule: 'Lundi 6 Octobre (11h - 17h)',
-      delivery: true,
-      cost: '3€',
-    },
-    {
-      city: 'LIVRAISON PAYANTE À DOMICILE',
-      location: 'NICE - Cagnes/Mer - Villeneuve Loubet',
-      type: 'Livraison payante',
-      address: '+ 5€',
-      schedule: 'Mardi 7 Octobre (12h - 16h)',
-      delivery: true,
-      cost: '5€',
-    },
-  ];
+  // Séparer les points de retrait par catégorie
+  const publicPoints = pickupPoints.filter(p => p.category === 'public');
+  const productionPoints = pickupPoints.filter(p => p.category === 'production');
+  const enterprisePoints = pickupPoints.filter(p => p.category === 'entreprise');
+  const sophiaPoints = pickupPoints.filter(p => p.category === 'sophia_antipolis');
 
   return (
     <div className='min-h-screen bg-accent-light'>
-      <PageHero title='Points de Distribution' subtitle={`${currentWeek.startDate} au ${currentWeek.endDate}`} />
+      <PageHero
+        title='Points de Distribution'
+        subtitle={`${currentWeek.startDate} au ${currentWeek.endDate}`}
+      />
 
       <div className='py-16'>
         <div className='container mx-auto px-4'>
           {/* Information pour les entreprises */}
           <div className='bg-blue-50 border border-blue-200 rounded-lg p-6 mb-12'>
-            <p className='text-center text-blue-800'>
-              <span className='font-semibold'>
-                Vous êtes une société, et désirez que lepanierduproducteur.com propose votre lieu de
-                distribution, merci de nous contacter au 06.16.69.70.97
-              </span>
-            </p>
+            <div className='text-center'>
+              <p className='text-blue-800 mb-4'>
+                <span className='font-semibold'>
+                  Vous êtes une société et souhaitez devenir un point de distribution ?
+                </span>
+              </p>
+              <div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
+                <a
+                  href='/contact'
+                  className='bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors'
+                >
+                  📝 Remplir le formulaire
+                </a>
+                <a
+                  href='tel:0616697097'
+                  className='bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors'
+                >
+                  📞 06.16.69.70.97
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Points de retrait principaux */}
@@ -298,210 +62,362 @@ export default function Distribution() {
             <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
               POINTS DE RETRAIT
             </h2>
-            <p className='text-center text-gray-600 mb-8'>{currentWeek.startDate} au {currentWeek.endDate}</p>
+            <p className='text-center text-gray-600 mb-8'>
+              {currentWeek.startDate} au {currentWeek.endDate}
+            </p>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {distributionPoints.map((point, index) => (
-                <div
-                  key={index}
-                  className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
-                >
-                  <div className='flex items-center justify-between mb-4'>
-                    <h3 className='text-lg font-display font-bold text-accent-dark'>
-                      {point.city}
-                    </h3>
-                    <div className='px-3 py-1 rounded-full text-sm font-medium bg-harvest-100 text-harvest-800'>
-                      {point.type}
-                    </div>
-                  </div>
+            {/* Production */}
+            {productionPoints.length > 0 && (
+              <div className='mb-12'>
+                <h3 className='text-2xl font-semibold text-accent-dark mb-6'>Production</h3>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                  {productionPoints.map(point => (
+                    <Link
+                      key={point.id}
+                      href={`/distribution/${point.id}`}
+                      className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                    >
+                      <div className='flex items-center justify-between mb-4'>
+                        <h4 className='text-lg font-display font-bold text-accent-dark'>
+                          {point.name}
+                        </h4>
+                        <div className='px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800'>
+                          Production
+                        </div>
+                      </div>
 
-                  <div className='space-y-3'>
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>📍</span>
-                      </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Lieu</p>
-                        <p className='text-gray-600 text-sm'>{point.address}</p>
-                      </div>
-                    </div>
+                      <div className='space-y-3'>
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📍</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Adresse</p>
+                            <p className='text-gray-600 text-sm'>{formatFullAddress(point)}</p>
+                          </div>
+                        </div>
 
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🕒</span>
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📅</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Jours</p>
+                            <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Horaires</p>
-                        <p className='text-gray-600 text-sm'>{point.schedule}</p>
-                      </div>
-                    </div>
-                  </div>
+                    </Link>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+
+            {/* Points publics */}
+            {publicPoints.length > 0 && (
+              <div className='mb-12'>
+                <h3 className='text-2xl font-semibold text-accent-dark mb-6'>Points publics</h3>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                  {publicPoints.map(point => (
+                    <Link
+                      key={point.id}
+                      href={`/distribution/${point.id}`}
+                      className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                    >
+                      <div className='flex items-center justify-between mb-4'>
+                        <h4 className='text-lg font-display font-bold text-accent-dark'>
+                          {point.name}
+                        </h4>
+                        <div className='px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800'>
+                          Public
+                        </div>
+                      </div>
+
+                      <div className='space-y-3'>
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📍</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Adresse</p>
+                            <p className='text-gray-600 text-sm'>{formatFullAddress(point)}</p>
+                          </div>
+                        </div>
+
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📅</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Jours</p>
+                            <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Points d'entreprise */}
+            {enterprisePoints.length > 0 && (
+              <div className='mb-12'>
+                <h3 className='text-2xl font-semibold text-accent-dark mb-6'>
+                  Points d'entreprise
+                </h3>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                  {enterprisePoints.map(point => (
+                    <Link
+                      key={point.id}
+                      href={`/distribution/${point.id}`}
+                      className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                    >
+                      <div className='flex items-center justify-between mb-4'>
+                        <h4 className='text-lg font-display font-bold text-accent-dark'>
+                          {point.name}
+                        </h4>
+                        <div className='px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800'>
+                          Entreprise
+                        </div>
+                      </div>
+
+                      <div className='space-y-3'>
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📍</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Adresse</p>
+                            <p className='text-gray-600 text-sm'>{formatFullAddress(point)}</p>
+                          </div>
+                        </div>
+
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>📅</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Jours</p>
+                            <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                          </div>
+                        </div>
+
+                        {point.restrictions && (
+                          <div className='flex items-start space-x-3'>
+                            <div className='w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                              <span className='text-white text-xs'>⚠️</span>
+                            </div>
+                            <div>
+                              <p className='font-semibold text-orange-800'>Restriction</p>
+                              <p className='text-orange-600 text-sm'>{point.restrictions}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          {/* Points de retrait Sophia Antipolis */}
-          <div className='mb-16'>
-            <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
-              POINTS DE RETRAIT SUR SOPHIA ANTIPOLIS
-            </h2>
+          {/* Points de retrait sur Sophia Antipolis */}
+          {sophiaPoints.length > 0 && (
+            <div className='mb-16'>
+              <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
+                POINTS DE RETRAIT sur Sophia Antipolis
+              </h2>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {sophiaAntipolisPoints.map((point, index) => (
-                <div
-                  key={index}
-                  className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
-                >
-                  <div className='flex items-center justify-between mb-4'>
-                    <h3 className='text-lg font-display font-bold text-accent-dark'>
-                      {point.city}
-                    </h3>
-                    <div className='px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800'>
-                      {point.type}
-                    </div>
-                  </div>
-
-                  <div className='space-y-3'>
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>📍</span>
-                      </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Lieu</p>
-                        <p className='text-gray-600 text-sm'>{point.address}</p>
+              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                {sophiaPoints.map(point => (
+                  <Link
+                    key={point.id}
+                    href={`/distribution/${point.id}`}
+                    className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                  >
+                    <div className='flex items-center justify-between mb-4'>
+                      <h4 className='text-lg font-display font-bold text-accent-dark'>
+                        {point.name}
+                      </h4>
+                      <div className='px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800'>
+                        Sophia Antipolis
                       </div>
                     </div>
 
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🕒</span>
+                    <div className='space-y-3'>
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>📍</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Adresse</p>
+                          <p className='text-gray-600 text-sm'>{formatFullAddress(point)}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Horaires</p>
-                        <p className='text-gray-600 text-sm'>{point.schedule}</p>
+
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>📅</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Jours</p>
+                          <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                        </div>
                       </div>
+
+                      {point.restrictions && (
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>⚠️</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-orange-800'>Restriction</p>
+                            <p className='text-orange-600 text-sm'>{point.restrictions}</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Livraison gratuite */}
-          <div className='mb-16'>
-            <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
-              LIVRAISON OFFERTE À VOTRE DOMICILE SUR ANTIBES
-            </h2>
-            <p className='text-center text-gray-600 mb-8'>{currentWeek.startDate} au {currentWeek.endDate}</p>
+          {freeDeliveryPoints.length > 0 && (
+            <div className='mb-16'>
+              <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
+                LIVRAISON OFFERTE À VOTRE DOMICILE
+              </h2>
+              <p className='text-center text-gray-600 mb-8'>
+                {currentWeek.startDate} au {currentWeek.endDate}
+              </p>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-              {freeDeliveryOptions.map((option, index) => (
-                <div
-                  key={index}
-                  className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
-                >
-                  <div className='flex items-center justify-between mb-4'>
-                    <h3 className='text-lg font-display font-bold text-accent-dark'>
-                      {option.city}
-                    </h3>
-                    <div
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        option.cost === 'Gratuit'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-orange-100 text-orange-800'
-                      }`}
-                    >
-                      {option.cost}
-                    </div>
-                  </div>
-
-                  <div className='space-y-3'>
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-earth-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🚚</span>
-                      </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Conditions</p>
-                        <p className='text-gray-600 text-sm'>{option.address}</p>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                {freeDeliveryPoints.map(point => (
+                  <Link
+                    key={point.id}
+                    href={`/distribution/${point.id}`}
+                    className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                  >
+                    <div className='flex items-center justify-between mb-4'>
+                      <h4 className='text-lg font-display font-bold text-accent-dark'>
+                        {point.name}
+                      </h4>
+                      <div className='px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800'>
+                        Gratuit
                       </div>
                     </div>
 
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🕒</span>
+                    <div className='space-y-3'>
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-earth-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>🚚</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Conditions</p>
+                          <p className='text-gray-600 text-sm'>
+                            Minimum {point.deliveryInfo?.minOrderAmount}€
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Horaires</p>
-                        <p className='text-gray-600 text-sm'>{option.schedule}</p>
+
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>📅</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Jours</p>
+                          <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Livraison payante */}
-          <div className='mb-16'>
-            <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
-              LIVRAISON PAYANTE À VOTRE DOMICILE
-            </h2>
-            <p className='text-center text-gray-600 mb-8'>{currentWeek.startDate} au {currentWeek.endDate}</p>
+          {paidDeliveryPoints.length > 0 && (
+            <div className='mb-16'>
+              <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
+                LIVRAISON PAYANTE À VOTRE DOMICILE
+              </h2>
+              <p className='text-center text-gray-600 mb-8'>
+                {currentWeek.startDate} au {currentWeek.endDate}
+              </p>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-              {paidDeliveryOptions.map((option, index) => (
-                <div
-                  key={index}
-                  className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300'
-                >
-                  <div className='flex items-center justify-between mb-4'>
-                    <h3 className='text-lg font-display font-bold text-accent-dark'>
-                      {option.city}
-                    </h3>
-                    <div
-                      className={`px-3 py-1 rounded-full text-sm font-medium ${
-                        option.cost === 'Gratuit'
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-orange-100 text-orange-800'
-                      }`}
-                    >
-                      {option.cost}
-                    </div>
-                  </div>
-
-                  <div className='space-y-3'>
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-earth-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🚚</span>
-                      </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Conditions</p>
-                        <p className='text-gray-600 text-sm'>{option.address}</p>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                {paidDeliveryPoints.map(point => (
+                  <Link
+                    key={point.id}
+                    href={`/distribution/${point.id}`}
+                    className='bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 block'
+                  >
+                    <div className='flex items-center justify-between mb-4'>
+                      <h4 className='text-lg font-display font-bold text-accent-dark'>
+                        {point.name}
+                      </h4>
+                      <div className='px-3 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-800'>
+                        +{point.deliveryInfo?.deliveryCost}€
                       </div>
                     </div>
 
-                    <div className='flex items-start space-x-3'>
-                      <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
-                        <span className='text-white text-xs'>🕒</span>
+                    <div className='space-y-3'>
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-earth-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>🚚</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Conditions</p>
+                          <p className='text-gray-600 text-sm'>
+                            Minimum {point.deliveryInfo?.minOrderAmount}€ +{' '}
+                            {point.deliveryInfo?.deliveryCost}€
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className='font-semibold text-accent-dark'>Horaires</p>
-                        <p className='text-gray-600 text-sm'>{option.schedule}</p>
+
+                      <div className='flex items-start space-x-3'>
+                        <div className='w-6 h-6 bg-harvest-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                          <span className='text-white text-xs'>📅</span>
+                        </div>
+                        <div>
+                          <p className='font-semibold text-accent-dark'>Jours</p>
+                          <p className='text-gray-600 text-sm'>{formatDistributionDays(point)}</p>
+                        </div>
                       </div>
+
+                      {point.deliveryInfo?.neighborhoods && (
+                        <div className='flex items-start space-x-3'>
+                          <div className='w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5'>
+                            <span className='text-white text-xs'>🏘️</span>
+                          </div>
+                          <div>
+                            <p className='font-semibold text-accent-dark'>Quartiers</p>
+                            <p className='text-gray-600 text-sm'>
+                              {point.deliveryInfo.neighborhoods.slice(0, 3).join(', ')}
+                              {point.deliveryInfo.neighborhoods.length > 3 && '...'}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </div>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Envoi sur toute la France */}
           <div className='mb-16'>
             <h2 className='text-3xl font-display font-bold text-accent-dark text-center mb-8'>
               ENVOI SUR TOUTE LA FRANCE
             </h2>
-            <p className='text-center text-gray-600 mb-8'>{currentWeek.startDate} au {currentWeek.endDate}</p>
+            <p className='text-center text-gray-600 mb-8'>
+              {currentWeek.startDate} au {currentWeek.endDate}
+            </p>
 
             <div className='bg-gradient-to-r from-primary-100 to-harvest-100 rounded-lg p-8'>
               <div className='text-center'>
@@ -530,6 +446,7 @@ export default function Distribution() {
             </div>
           </div>
 
+          {/* Comment commander */}
           <div className='mt-16 bg-gradient-to-r from-primary-100 to-harvest-100 rounded-lg p-8'>
             <div className='text-center'>
               <h2 className='text-2xl font-display font-bold text-accent-dark mb-4'>
@@ -543,7 +460,9 @@ export default function Distribution() {
                   <h3 className='text-lg font-semibold text-accent-dark mb-2'>
                     1. Commandez en ligne
                   </h3>
-                  <p className='text-gray-600'>Choisissez vos produits et votre point de retrait</p>
+                  <p className='text-gray-600'>
+                    Choisissez vos produits et votre point de distribution
+                  </p>
                 </div>
                 <div className='text-center'>
                   <div className='w-16 h-16 bg-harvest-500 rounded-full flex items-center justify-center mx-auto mb-4'>

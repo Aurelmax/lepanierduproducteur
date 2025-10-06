@@ -25,3 +25,5 @@
 #
 # Mise à jour des dépendances chaque premier dimanche du mois
 # 0 5 1-7 * 0 cd /path/to/project && npm update && npm run build
+
+
