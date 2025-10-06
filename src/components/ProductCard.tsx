@@ -6,7 +6,7 @@ import { useCart } from '../contexts/CartContext';
 interface ProductCardProps {
   title: string;
   description: string;
-  price: number;
+  price: number | string;
   image?: string;
   category: 'legumes' | 'fruits' | 'autres';
   productId: string;
@@ -21,6 +21,27 @@ export default function ProductCard({
   productId,
 }: ProductCardProps) {
   const { dispatch } = useCart();
+
+  // Fonction pour extraire le prix numérique d'une chaîne
+  const extractNumericPrice = (price: number | string): number => {
+    if (typeof price === 'number') {
+      return price;
+    }
+
+    // Extraire le nombre de la chaîne (ex: "8€/pot" -> 8)
+    const match = price.toString().match(/(\d+(?:\.\d+)?)/);
+    return match ? parseFloat(match[1]) : 0;
+  };
+
+  // Fonction pour formater l'affichage du prix
+  const formatPrice = (price: number | string): string => {
+    if (typeof price === 'number') {
+      return `${price.toFixed(2)}€`;
+    }
+    return price.toString();
+  };
+
+  const numericPrice = extractNumericPrice(price);
 
   const categoryColors = {
     legumes: 'bg-primary-100 border-primary-300 text-primary-800',
@@ -41,7 +62,7 @@ export default function ProductCard({
       payload: {
         id: productId,
         name: title,
-        price: price,
+        price: numericPrice,
         quantity: 1,
         unit: 'unité',
         image: image || '/legumes.webp',
@@ -56,7 +77,11 @@ export default function ProductCard({
 
   return (
     <div className='bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300'>
-      {image && (
+      {image ? (
+        <div className='h-48 bg-gradient-to-br from-primary-200 to-primary-300 flex items-center justify-center overflow-hidden'>
+          <img src={image} alt={title} className='w-full h-full object-cover' />
+        </div>
+      ) : (
         <div className='h-48 bg-gradient-to-br from-primary-200 to-primary-300 flex items-center justify-center'>
           <span className='text-6xl'>{categoryIcons[category]}</span>
         </div>
@@ -71,7 +96,7 @@ export default function ProductCard({
         <p className='text-gray-600 mb-4'>{description}</p>
 
         <div className='flex items-center justify-between'>
-          <span className='text-2xl font-bold text-primary-600'>{price.toFixed(2)}€</span>
+          <span className='text-2xl font-bold text-primary-600'>{formatPrice(price)}</span>
           <button
             onClick={handleAddToCart}
             className='bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center space-x-2'

@@ -31,6 +31,7 @@ export default function Home() {
               price={12.0}
               category='fruits'
               productId='fruits-verger'
+              image='https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&h=300&fit=crop&auto=format'
             />
             <ProductCard
               title='Produits Artisanaux'
@@ -38,6 +39,7 @@ export default function Home() {
               price={8.0}
               category='autres'
               productId='produits-artisanaux'
+              image='https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=300&fit=crop&auto=format'
             />
           </div>
         </div>

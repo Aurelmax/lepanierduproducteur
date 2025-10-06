@@ -107,21 +107,20 @@ export default function ModernFooter() {
           {/* Partenariats */}
           <div>
             <h4 className='font-semibold mb-4 text-gray-300'>en partenariat</h4>
-            <div className='space-y-4'>
-              <div className='bg-white rounded-lg p-3'>
-                <div className='text-xs text-center'>
-                  <div className='text-[10px] font-bold text-green-600'>
-                    AGRICULTURES & TERRITOIRES
-                  </div>
-                  <div className='text-[8px] text-gray-600'>CHAMBRE D'AGRICULTURE</div>
-                  <div className='text-[8px] font-bold text-blue-600'>ALPES-MARITIMES</div>
-                </div>
+            <div className='space-y-6'>
+              <div className='flex items-center justify-center'>
+                <img
+                  src='/agricultureetterritoire.png'
+                  alt="Agriculture et Territoires - Chambre d'Agriculture Alpes-Maritimes"
+                  className='h-16 w-auto object-contain'
+                />
               </div>
-              <div className='bg-white rounded-lg p-3'>
-                <div className='text-xs text-center'>
-                  <div className='text-[10px] font-bold text-green-600'>BIENVENUE</div>
-                  <div className='text-[8px] text-gray-600'>à la Ferme</div>
-                </div>
+              <div className='flex items-center justify-center'>
+                <img
+                  src='/bienvenuealaferme.png'
+                  alt='Bienvenue à la ferme'
+                  className='h-16 w-auto object-contain'
+                />
               </div>
             </div>
           </div>

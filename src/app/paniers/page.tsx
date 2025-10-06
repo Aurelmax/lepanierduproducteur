@@ -86,6 +86,7 @@ export default function Paniers() {
           <BasketCard
             title='Panier Fraîcheur SOLO'
             price='12,00€'
+            isAvailable={false}
             items={[
               { quantity: '500gr', name: 'Tomate "Ancienne"' },
               { quantity: '500gr', name: 'Courgette' },
@@ -105,6 +106,7 @@ export default function Paniers() {
             title='Panier Fraîcheur DUO'
             price='16,00€'
             isPopular={true}
+            isAvailable={false}
             items={[
               { quantity: '800gr', name: 'Tomate "Ancienne"' },
               { quantity: '800gr', name: 'Courgette' },
@@ -123,6 +125,7 @@ export default function Paniers() {
           <BasketCard
             title='Panier Fraîcheur FAMILIAL'
             price='24,00€'
+            isAvailable={false}
             items={[
               { quantity: '1,1 Kg', name: 'Tomate "Ancienne"' },
               { quantity: '1,1 Kg', name: 'Courgette' },
@@ -156,6 +159,7 @@ export default function Paniers() {
           <BasketCard
             title='Panier de Fruits Dégustation'
             price='35,00€'
+            isAvailable={false}
             items={[
               { quantity: '2 Kg', name: 'Raisin "Noir"' },
               { quantity: '2 Kg', name: 'Poire "Guyot"' },

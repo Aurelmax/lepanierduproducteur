@@ -11,6 +11,7 @@ interface BasketCardProps {
   price: string;
   items: BasketItem[];
   isPopular?: boolean;
+  isAvailable?: boolean;
   onOrder: () => void;
   subscriptionPrice?: string;
   subscriptionDiscount?: string;
@@ -21,28 +22,38 @@ export default function BasketCard({
   price,
   items,
   isPopular = false,
+  isAvailable = true,
   onOrder,
   subscriptionPrice,
   subscriptionDiscount,
 }: BasketCardProps) {
   return (
     <div
-      className={`relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden ${isPopular ? 'ring-2 ring-primary-500' : ''}`}
+      className={`relative bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden ${isPopular ? 'ring-2 ring-primary-500' : ''} ${!isAvailable ? 'opacity-75' : ''}`}
     >
       {/* Logo en arrière-plan */}
       <div className='absolute top-4 right-4 opacity-5'>
         <img src='/logo.png' alt='Le Panier du Producteur' className='w-20 h-20 object-contain' />
       </div>
 
+      {/* Logo Origine France */}
+      <div className='absolute top-4 left-4 z-10'>
+        <img
+          src='/origine-france-fruites-et-legumes-p.png'
+          alt='Origine France - Fruits et Légumes'
+          className='w-14 h-14 object-contain opacity-90'
+        />
+      </div>
+
       {isPopular && (
-        <div className='absolute -top-3 left-1/2 transform -translate-x-1/2 z-10'>
-          <span className='bg-primary-500 text-white px-4 py-1 rounded-full text-sm font-semibold'>
+        <div className='absolute -top-2 left-1/2 transform -translate-x-1/2 z-10'>
+          <span className='bg-primary-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md'>
             Populaire
           </span>
         </div>
       )}
 
-      <div className='p-6 relative z-10'>
+      <div className={`relative z-10 ${isPopular ? 'pt-8 px-6 pb-6' : 'p-6'}`}>
         <div className='text-center mb-4'>
           <h3 className='text-xl font-display font-bold text-accent-dark mb-2'>{title}</h3>
           <div className='text-3xl font-bold text-primary-600'>{price}</div>
@@ -71,11 +82,25 @@ export default function BasketCard({
           ))}
         </div>
 
+        {/* Overlay "Plus de paniers" */}
+        {!isAvailable && (
+          <div className='absolute inset-0 bg-red-500/20 flex items-center justify-center z-20'>
+            <div className='bg-red-500 text-white px-6 py-3 rounded-lg font-bold text-lg transform -rotate-12 shadow-lg'>
+              PLUS DE PANIERS
+            </div>
+          </div>
+        )}
+
         <button
           onClick={onOrder}
-          className='w-full bg-primary-500 hover:bg-primary-600 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200 transform hover:scale-105'
+          disabled={!isAvailable}
+          className={`w-full py-3 px-4 rounded-lg font-semibold transition-colors duration-200 ${
+            isAvailable
+              ? 'bg-primary-500 hover:bg-primary-600 text-white transform hover:scale-105'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
         >
-          Commander
+          {isAvailable ? 'Commander' : 'Indisponible'}
         </button>
       </div>
     </div>

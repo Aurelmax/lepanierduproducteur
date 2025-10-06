@@ -259,4 +259,4 @@ graph LR
 
 ---
 
-_Diagrammes créés avec Mermaid - Décembre 2024_
+_Diagrammes créés avec Mermaid - Octobre 2025_
