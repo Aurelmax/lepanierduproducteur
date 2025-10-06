@@ -5,31 +5,31 @@ import { CheckCircle, Clock, Heart, Shield, Truck } from 'lucide-react';
 export default function SubscriptionBenefits() {
   const benefits = [
     {
-      icon: <CheckCircle className='w-8 h-8 text-green-500' />,
+      icon: <CheckCircle className='w-8 h-8 text-primary-500' />,
       title: 'Économies garanties',
       description: "10% de réduction sur chaque panier, soit jusqu'à 14€ d'économie par mois",
       highlight: "Jusqu'à 168€/an",
     },
     {
-      icon: <Clock className='w-8 h-8 text-blue-500' />,
+      icon: <Clock className='w-8 h-8 text-earth-500' />,
       title: 'Gain de temps',
       description: 'Plus besoin de penser à commander, vos légumes arrivent automatiquement',
       highlight: 'Zéro stress',
     },
     {
-      icon: <Heart className='w-8 h-8 text-red-500' />,
+      icon: <Heart className='w-8 h-8 text-harvest-500' />,
       title: 'Fruits et légumes frais',
       description: 'Récoltés le matin même, livrés directement du producteur',
       highlight: '100% fraîcheur',
     },
     {
-      icon: <Shield className='w-8 h-8 text-purple-500' />,
+      icon: <Shield className='w-8 h-8 text-denim-500' />,
       title: 'Flexibilité totale',
       description: 'Annulez ou mettez en pause votre abonnement quand vous voulez',
       highlight: 'Sans engagement',
     },
     {
-      icon: <Truck className='w-8 h-8 text-orange-500' />,
+      icon: <Truck className='w-8 h-8 text-primary-600' />,
       title: 'Livraison gratuite',
       description: 'Livraison à domicile ou retrait au point de votre choix',
       highlight: 'Partout sur la région',

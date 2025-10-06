@@ -26,45 +26,45 @@ export default function SubscriptionCard({
           name: 'SOLO',
           description: 'Parfait pour 1-2 personnes',
           icon: '👤',
-          color: 'from-blue-500 to-blue-600',
-          bgColor: 'bg-blue-50',
-          borderColor: 'border-blue-200',
+          color: 'from-primary-500 to-primary-600',
+          bgColor: 'bg-primary-50',
+          borderColor: 'border-primary-200',
         };
       case 'duo':
         return {
           name: 'DUO',
           description: 'Idéal pour 2-3 personnes',
           icon: '👥',
-          color: 'from-green-500 to-green-600',
-          bgColor: 'bg-green-50',
-          borderColor: 'border-green-200',
+          color: 'from-earth-500 to-earth-600',
+          bgColor: 'bg-earth-50',
+          borderColor: 'border-earth-200',
         };
       case 'familial':
         return {
           name: 'FAMILIAL',
           description: 'Pour toute la famille (4+ personnes)',
           icon: '👨‍👩‍👧‍👦',
-          color: 'from-purple-500 to-purple-600',
-          bgColor: 'bg-purple-50',
-          borderColor: 'border-purple-200',
+          color: 'from-harvest-500 to-harvest-600',
+          bgColor: 'bg-harvest-50',
+          borderColor: 'border-harvest-200',
         };
       case 'fruits':
         return {
           name: 'FRUITS',
           description: 'Sélection de fruits de saison',
           icon: '🍎',
-          color: 'from-orange-500 to-orange-600',
-          bgColor: 'bg-orange-50',
-          borderColor: 'border-orange-200',
+          color: 'from-denim-500 to-denim-600',
+          bgColor: 'bg-denim-50',
+          borderColor: 'border-denim-200',
         };
       case 'degustation':
         return {
           name: 'DÉGUSTATION',
           description: 'Fruits premium pour gourmets',
           icon: '🍇',
-          color: 'from-pink-500 to-pink-600',
-          bgColor: 'bg-pink-50',
-          borderColor: 'border-pink-200',
+          color: 'from-primary-600 to-primary-700',
+          bgColor: 'bg-primary-100',
+          borderColor: 'border-primary-300',
         };
     }
   };
@@ -81,9 +81,9 @@ export default function SubscriptionCard({
     >
       {/* Badge Populaire */}
       {isPopular && (
-        <div className='absolute -top-3 left-1/2 transform -translate-x-1/2 z-20'>
-          <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-bold flex items-center space-x-1 shadow-lg'>
-            <Star className='w-4 h-4 fill-current' />
+        <div className='absolute -top-2 left-1/2 transform -translate-x-1/2 z-20'>
+          <div className='bg-gradient-to-r from-harvest-500 to-harvest-600 text-white px-4 py-1.5 rounded-full text-xs font-bold flex items-center space-x-1 shadow-lg'>
+            <Star className='w-3 h-3 fill-current' />
             <span>POPULAIRE</span>
           </div>
         </div>
