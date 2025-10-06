@@ -1,16 +1,21 @@
-import { notFound } from 'next/navigation';
+'use client';
+
+import { notFound, useRouter } from 'next/navigation';
+import { use } from 'react';
 import DistributionPointDetail from '../../../components/DistributionPointDetail';
 import PageHero from '../../../components/PageHero';
 import { getDistributionPointById } from '../../../utils/distributionUtils';
 
 interface DistributionPointPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default function DistributionPointPage({ params }: DistributionPointPageProps) {
-  const pointId = parseInt(params.id);
+  const router = useRouter();
+  const resolvedParams = use(params);
+  const pointId = parseInt(resolvedParams.id);
 
   if (isNaN(pointId)) {
     notFound();
@@ -34,26 +39,9 @@ export default function DistributionPointPage({ params }: DistributionPointPageP
         showOrderButton={true}
         onOrderClick={() => {
           // Rediriger vers le checkout avec le point pré-sélectionné
-          window.location.href = '/checkout';
+          router.push('/checkout');
         }}
       />
     </div>
   );
-}
-
-// Générer les métadonnées pour chaque page
-export async function generateMetadata({ params }: DistributionPointPageProps) {
-  const pointId = parseInt(params.id);
-  const point = getDistributionPointById(pointId);
-
-  if (!point) {
-    return {
-      title: 'Point de distribution non trouvé',
-    };
-  }
-
-  return {
-    title: `${point.name} - Points de distribution`,
-    description: `Informations détaillées pour le point de distribution ${point.name} à ${point.city}. Horaires, adresse et conditions de retrait/livraison.`,
-  };
 }

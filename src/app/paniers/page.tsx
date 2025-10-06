@@ -1,8 +1,8 @@
 'use client';
 
 import BasketCard from '../../components/BasketCard';
+import CompactNewsletter from '../../components/CompactNewsletter';
 import DeliveryOptions from '../../components/DeliveryOptions';
-import Newsletter from '../../components/Newsletter';
 import PageHero from '../../components/PageHero';
 import WeeklyComposition from '../../components/WeeklyComposition';
 import { useCart } from '../../contexts/CartContext';
@@ -13,46 +13,46 @@ export default function Paniers() {
   const handleOrder = (basketType: string) => {
     // Créer un produit panier avec les détails
     const basketProducts = {
-      'SOLO': {
+      SOLO: {
         id: 'panier-solo',
         name: 'Panier Fraîcheur SOLO',
-        price: 12.00,
+        price: 12.0,
         unit: 'panier',
         image: '/legumes.webp',
         isNew: false,
         isPromotion: false,
       },
-      'DUO': {
+      DUO: {
         id: 'panier-duo',
         name: 'Panier Fraîcheur DUO',
-        price: 16.00,
+        price: 16.0,
         unit: 'panier',
         image: '/legumes.webp',
         isNew: false,
         isPromotion: false,
       },
-      'FAMILIAL': {
+      FAMILIAL: {
         id: 'panier-familial',
         name: 'Panier Fraîcheur FAMILIAL',
-        price: 24.00,
+        price: 24.0,
         unit: 'panier',
         image: '/legumes.webp',
         isNew: false,
         isPromotion: false,
       },
-      'Fruits': {
+      Fruits: {
         id: 'panier-fruits',
         name: 'Panier Fruits',
-        price: 15.00,
+        price: 15.0,
         unit: 'panier',
         image: '/legumes.webp',
         isNew: false,
         isPromotion: false,
       },
-      'Dégustation': {
+      Dégustation: {
         id: 'panier-degustation',
         name: 'Panier de Fruits Dégustation',
-        price: 35.00,
+        price: 35.0,
         unit: 'panier',
         image: '/legumes.webp',
         isNew: false,
@@ -77,18 +77,15 @@ export default function Paniers() {
   };
 
   return (
-    <div className="min-h-screen bg-accent-light">
-      <PageHero
-        title="Nos Paniers"
-        subtitle="Découvrez nos paniers de fruits et légumes frais"
-      />
-      <div className="container mx-auto px-4 py-8">
+    <div className='min-h-screen bg-accent-light'>
+      <PageHero title='Nos Paniers' subtitle='Découvrez nos paniers de fruits et légumes frais' />
+      <div className='container mx-auto px-4 py-8'>
         <WeeklyComposition />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12'>
           <BasketCard
-            title="Panier Fraîcheur SOLO"
-            price="12,00€"
+            title='Panier Fraîcheur SOLO'
+            price='12,00€'
             items={[
               { quantity: '500gr', name: 'Tomate "Ancienne"' },
               { quantity: '500gr', name: 'Courgette' },
@@ -100,13 +97,13 @@ export default function Paniers() {
               { quantity: '700gr', name: 'Raisin "Blanc"' },
             ]}
             onOrder={() => handleOrder('SOLO')}
-            subscriptionPrice="43,20€"
-            subscriptionDiscount="10%"
+            subscriptionPrice='43,20€'
+            subscriptionDiscount='10%'
           />
 
           <BasketCard
-            title="Panier Fraîcheur DUO"
-            price="16,00€"
+            title='Panier Fraîcheur DUO'
+            price='16,00€'
             isPopular={true}
             items={[
               { quantity: '800gr', name: 'Tomate "Ancienne"' },
@@ -119,13 +116,13 @@ export default function Paniers() {
               { quantity: '1,1 Kg', name: 'Raisin "Blanc"' },
             ]}
             onOrder={() => handleOrder('DUO')}
-            subscriptionPrice="57,60€"
-            subscriptionDiscount="10%"
+            subscriptionPrice='57,60€'
+            subscriptionDiscount='10%'
           />
 
           <BasketCard
-            title="Panier Fraîcheur FAMILIAL"
-            price="24,00€"
+            title='Panier Fraîcheur FAMILIAL'
+            price='24,00€'
             items={[
               { quantity: '1,1 Kg', name: 'Tomate "Ancienne"' },
               { quantity: '1,1 Kg', name: 'Courgette' },
@@ -137,13 +134,13 @@ export default function Paniers() {
               { quantity: '1,5 Kg', name: 'Raisin "Blanc"' },
             ]}
             onOrder={() => handleOrder('FAMILIAL')}
-            subscriptionPrice="86,40€"
-            subscriptionDiscount="10%"
+            subscriptionPrice='86,40€'
+            subscriptionDiscount='10%'
           />
 
           <BasketCard
-            title="Panier Fruits"
-            price="15,00€"
+            title='Panier Fruits'
+            price='15,00€'
             items={[
               { quantity: '800gr', name: 'Raisin "Noir"' },
               { quantity: '1 Kg', name: 'Pomme "Gala"' },
@@ -152,13 +149,13 @@ export default function Paniers() {
               { quantity: '1 Kg', name: 'Brugnon' },
             ]}
             onOrder={() => handleOrder('Fruits')}
-            subscriptionPrice="54,00€"
-            subscriptionDiscount="10%"
+            subscriptionPrice='54,00€'
+            subscriptionDiscount='10%'
           />
 
           <BasketCard
-            title="Panier de Fruits Dégustation"
-            price="35,00€"
+            title='Panier de Fruits Dégustation'
+            price='35,00€'
             items={[
               { quantity: '2 Kg', name: 'Raisin "Noir"' },
               { quantity: '2 Kg', name: 'Poire "Guyot"' },
@@ -168,14 +165,14 @@ export default function Paniers() {
               { quantity: '2 Kg', name: 'Brugnon' },
             ]}
             onOrder={() => handleOrder('Dégustation')}
-            subscriptionPrice="126,00€"
-            subscriptionDiscount="10%"
+            subscriptionPrice='126,00€'
+            subscriptionDiscount='10%'
           />
         </div>
 
         <DeliveryOptions />
 
-        <Newsletter />
+        <CompactNewsletter />
       </div>
     </div>
   );

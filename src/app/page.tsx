@@ -1,7 +1,7 @@
-import HeroSection from '../components/HeroSection';
-import ProductCard from '../components/ProductCard';
-import Newsletter from '../components/Newsletter';
 import Certifications from '../components/Certifications';
+import HeroSection from '../components/HeroSection';
+import Newsletter from '../components/Newsletter';
+import ProductCard from '../components/ProductCard';
 
 export default function Home() {
   return (
@@ -20,20 +20,24 @@ export default function Home() {
             <ProductCard
               title='Panier Légumes de Saison'
               description='Sélection de légumes frais récoltés le matin même'
-              price='15€'
+              price={15.0}
               category='legumes'
+              productId='legumes-saison'
+              image='/legumes.webp'
             />
             <ProductCard
               title='Fruits du Verger'
               description='Pommes, poires et autres fruits de saison'
-              price='12€'
+              price={12.0}
               category='fruits'
+              productId='fruits-verger'
             />
             <ProductCard
               title='Produits Artisanaux'
               description='Miel, confitures et autres spécialités locales'
-              price='8€'
+              price={8.0}
               category='autres'
+              productId='produits-artisanaux'
             />
           </div>
         </div>
